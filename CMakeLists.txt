@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.1)
 project(witmotion-uart-qt)
 
+# Remove all warnings
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w")
+
 # VERSIONING
 execute_process(COMMAND git rev-parse --short HEAD
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
@@ -124,13 +127,5 @@ if(BUILD_EXAMPLES)
         )
     target_link_libraries(wt31n-standalone-decoder Qt5::Core Qt5::SerialPort)
 endif(BUILD_EXAMPLES)
-
-# DOCUMENTATION
-if(BUILD_DOCS)
-    include(cmake/doxygen-generator.cmake)
-    if(${PROJECT_NAME}_DOCS_EXISTS)
-        add_custom_target(docs ALL DEPENDS doc-${PROJECT_NAME})
-    endif(${PROJECT_NAME}_DOCS_EXISTS)
-endif(BUILD_DOCS)
 
 # INSTALLATION
